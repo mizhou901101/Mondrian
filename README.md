@@ -1,5 +1,6 @@
 # Mondrian
 It is a java project of random Mondrian creator. 
+
 What you can get:
   1. Random Mondrian images with random grids and colors.
   2. It will fill your whole browser, and you can resize your brower to get different sizes of Mondrian.
