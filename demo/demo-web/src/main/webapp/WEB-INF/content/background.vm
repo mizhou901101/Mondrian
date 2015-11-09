@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<script type="text/javascript">
+		
+		// code for IE7+, Firefox, Chrome, Opera, Safari	
+		window.onload = function display_alert()
+		{
+			// get the window size
+			winWidth = window.innerWidth;
+			winHeight = window.innerHeight;
+			
+			// Ajax gets a list of rectangles' data
+			xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("GET","mondrian/" + winWidth + "_" + winHeight + ".json",false);
+			xmlhttp.send();
+			rectangles = xmlhttp.responseText;
+			
+			// draw the background
+			jsonData = JSON.parse(rectangles);
+			for (var i = 0; i < jsonData.length; i++)
+			{
+				// create a rectangle
+				var div = document.createElement("div");
+				div.style.position = "absolute";
+				div.style.width = jsonData[i].width * 50 + "px";
+				div.style.height = jsonData[i].height * 50 + "px";
+				div.style.left = jsonData[i].x * 50 + "px";
+				div.style.top = jsonData[i].y * 50 + "px";
+				div.style.background = jsonData[i].color;
+				
+				var borderDiv = document.createElement("div");
+				borderDiv.style.position = "absolute";
+				borderDiv.style.border="4px solid #000000";
+				borderDiv.style.width = jsonData[i].width * 50 - 8 + "px";
+				borderDiv.style.height = jsonData[i].height * 50 - 8 + "px";
+				borderDiv.style.left = jsonData[i].x * 50 + "px";
+				borderDiv.style.top = jsonData[i].y * 50 + "px";
+				
+				// draw the rectangle on the window
+   				var container = document.getElementById('container');
+				container.appendChild(div);
+				container.appendChild(borderDiv);
+			}
+		}
+		</script>
+		
+		<style>
+		    #container {
+				width: 100%;
+				height: 100%;
+				background: grey;
+				position: relative;
+		    }
+		</style>
+	</head>
+	<body style="margin:0;overflow-y:hidden;overflow-x:hidden;">
+		<div id="container">
+		</div>
+	</body>
+</html>

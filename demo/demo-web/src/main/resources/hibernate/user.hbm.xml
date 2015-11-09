@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE hibernate-mapping PUBLIC    
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"    
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+<hibernate-mapping>  
+    <class name="org.demo.common.jodo.UserDO" table="demo_user">  
+        <id name="id" column="id">  
+            <generator class="native" />  
+        </id>  
+        <property name="userName" column="user_name" />  
+        <property name="gmtModified" column="gmt_modified" not-null="true"/>
+        <property name="gmtCreated" column="gmt_created" not-null="true"/>
+    </class>  
+    
+    <sql-query name="user.selectUserById">  
+        <return alias="userDO" class="org.demo.common.jodo.UserDO" >  
+            <return-property name="id" column="id"></return-property>  
+            <return-property name="userName" column="user_name"></return-property>  
+            <return-property name="gmtModified" column="gmt_modified"></return-property>  
+            <return-property name="gmtCreated" column="gmt_created"></return-property>  
+        </return>  
+            SELECT 
+            	t.id,
+            	t.user_name,
+            	t.gmt_modified,  
+            	t.gmt_created
+            FROM demo_user t
+            WHERE t.id=:id
+     </sql-query> 
+</hibernate-mapping>
